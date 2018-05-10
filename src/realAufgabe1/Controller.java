@@ -20,6 +20,10 @@ public class Controller {
 	@FXML
 	private ResourceBundle resources;
 	
+	private boolean found;
+	
+	private int publicationCount;
+	
 	private static List<PaperCitation> list = new LinkedList<PaperCitation>();
 
 	public Controller() throws FileNotFoundException {
@@ -28,14 +32,27 @@ public class Controller {
 	
 	@FXML
 	private void initialize() {
-		System.out.println("Initialized SayHelloController");
 	}
 	
 	@FXML
 	protected void onEnterPressed() {
-		// TODO: No number and special symbol
+
 		String name = input.getText();
-		output.setText("" + computeHIndex(getListPaperCitationFromName(name)));
+
+		// Test for forbidden characters
+		if(!name.replaceAll("[a-zA-Z0-9. ]","").equals("")) {
+			output.setText("Error: " + name + " contains forbidden characters!");
+			return;
+		}
+
+		int result = computeHIndex(getListPaperCitationFromName(name));
+
+		output.setText(
+				"" + 
+				(found
+				? "HIndex: " + result + " | Publication Count: " + publicationCount
+				: "Error: Author not found!")
+		);
 	}
 	
 	/**
@@ -44,17 +61,29 @@ public class Controller {
 	 * @return a list of papers
 	 */
 	private List<PaperCitation> getListPaperCitationFromName(String name) {
-		List<PaperCitation> l = new LinkedList<PaperCitation>();
-		// TODO: namen
-		for(int i = 0; i < list.size(); i++) {
-	        if(list.get(i).getAuthor().equals("K Schneider") || 
-	        		list.get(i).getAuthor().equals("K. Schneider") ||
-	        		list.get(i).getAuthor().equals("Kurt Schneider")) {
-	        	l.add(list.get(i));
+		List<PaperCitation> matchedNames = new LinkedList<PaperCitation>();
+		
+		name = name.toLowerCase();
+		String[] searchNames = name.split(" ");
+		String searchLastName = searchNames[searchNames.length - 1];
+		
+		for(PaperCitation iterator : list) {
+			
+			// Match for last name and first character of first name
+			String[] names = iterator.getAuthor().toLowerCase().split(" ");
+			String lastName = names[names.length - 1];
+	        if(searchLastName.equals(lastName) &&
+	        		names[0].startsWith("" + searchNames[0].charAt(0))) {
+	        	matchedNames.add(iterator);
 	        }
 	        	
 	    }
-		return l;
+		
+		// If list is empty, the author was not found
+		found = !(matchedNames.size() == 0);
+		publicationCount = matchedNames.size();
+		
+		return matchedNames;
 	}
 	
 	/**
@@ -65,10 +94,10 @@ public class Controller {
 	private int computeHIndex(List<PaperCitation> citations) {
 	    Collections.sort(citations, new Comparator<PaperCitation>() {
 	    	@Override
-	    	public int compare(PaperCitation pc1, PaperCitation pc2) {
-	    		int c1 = pc1.getCitations();
-	    		int c2 = pc2.getCitations();
-	    		return c1 < c2 ? -1 : c1 == c2 ? 0 : 1;
+	    	public int compare(PaperCitation paperCitation1, PaperCitation paperCitation2) {
+	    		int citationCount1 = paperCitation1.getCitations();
+	    		int citationCount2 = paperCitation2.getCitations();
+	    		return citationCount1 < citationCount2 ? -1 : citationCount1 == citationCount2 ? 0 : 1;
 	    	}
 	    });
 	 

@@ -15,7 +15,7 @@
             <TextField fx:id="input" onAction="#onEnterPressed" BorderPane.alignment="CENTER" />
          </top>
          <center>
-            <Text fx:id="output" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" BorderPane.alignment="CENTER" />
+            <Text fx:id="output" strokeType="OUTSIDE" strokeWidth="0.0" text="HIndex: " BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </center>

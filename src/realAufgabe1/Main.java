@@ -6,6 +6,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 
+/*
+LEGACY CODE; NOT NEEDED ANYMORE
+TODO: Delete
+
+*/
 public class Main {
 
 	static List<PaperCitation> list = new LinkedList<PaperCitation>();
