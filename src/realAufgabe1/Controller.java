@@ -40,7 +40,7 @@ public class Controller {
 		String name = input.getText();
 
 		// Test for forbidden characters
-		if(!name.replaceAll("[a-zA-Z0-9. ]","").equals("")) {
+		if(!name.replaceAll("[a-zA-Z. ]","").equals("")) {
 			output.setText("Error: " + name + " contains forbidden characters!");
 			return;
 		}
