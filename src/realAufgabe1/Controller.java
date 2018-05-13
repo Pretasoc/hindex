@@ -60,7 +60,7 @@ public class Controller {
 	 * @param name name of the author
 	 * @return a list of papers
 	 */
-	private List<PaperCitation> getListPaperCitationFromName(String name) {
+	public List<PaperCitation> getListPaperCitationFromName(String name) {
 		List<PaperCitation> matchedNames = new LinkedList<PaperCitation>();
 		
 		name = name.toLowerCase();
@@ -83,6 +83,10 @@ public class Controller {
 		found = !(matchedNames.size() == 0);
 		publicationCount = matchedNames.size();
 		
+		for(PaperCitation pc : matchedNames) {
+			System.out.println(pc.getAuthor() + " " + pc.getTitle() + " " + pc.getCitations());
+		}
+		
 		return matchedNames;
 	}
 	
@@ -91,7 +95,7 @@ public class Controller {
 	 * @param citations list of citations
 	 * @return h-index
 	 */
-	private int computeHIndex(List<PaperCitation> citations) {
+	public int computeHIndex(List<PaperCitation> citations) {
 	    Collections.sort(citations, new Comparator<PaperCitation>() {
 	    	@Override
 	    	public int compare(PaperCitation paperCitation1, PaperCitation paperCitation2) {

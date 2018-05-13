@@ -6,7 +6,7 @@ public class PaperCitation {
 	private String title;
 	private int citations;
 
-	PaperCitation(String author, String title, int citations){
+	public PaperCitation(String author, String title, int citations){
 		this.setAuthor(author);
 		this.setTitle(title);
 		this.setCitations(citations);
@@ -34,6 +34,12 @@ public class PaperCitation {
 
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		PaperCitation other = (PaperCitation)o;
+		return this.author.equals(other.getAuthor()) && this.title.equals(other.getTitle()) && this.citations == other.getCitations();
 	}
 
 }
