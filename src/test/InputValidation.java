@@ -15,10 +15,10 @@ public class InputValidation {
 	@Test
 	public void test() throws FileNotFoundException {
 		Controller c = new Controller();
-		Assert.assertEquals(c.validateInput("f0rbi$$en"), true);
-		Assert.assertEquals(c.validateInput("Kurt Schneider"), false);
-		Assert.assertEquals(c.validateInput("F Kortum"), false);
-		Assert.assertEquals(c.validateInput("not a n4ame"), true);
+		Assert.assertEquals(c.isMalformed("f0rbi$$en"), true);
+		Assert.assertEquals(c.isMalformed("Kurt Schneider"), false);
+		Assert.assertEquals(c.isMalformed("F Kortum"), false);
+		Assert.assertEquals(c.isMalformed("not a n4ame"), true);
 	}
 
 }

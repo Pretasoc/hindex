@@ -43,7 +43,9 @@ public class Controller {
 	 * @param name
 	 * @return true if forbidden characters present, else false
 	 */
-	public boolean validateInput(String name) {
+	public boolean isMalformed(String name) {
+		if (name.length() == 0) return true;
+		if (name.startsWith(" ")) return true; 
 		return !name.replaceAll("[a-zA-Z. ]","").equals("");
 	}
 	
@@ -58,7 +60,7 @@ public class Controller {
 
 		String name = input.getText();
 
-		if(validateInput(name)) {
+		if(isMalformed(name)) {
 			output.setText("Error: " + name + " contains forbidden characters!");
 			return;
 		}
