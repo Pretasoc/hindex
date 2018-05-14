@@ -22,17 +22,12 @@ public class Controller {
 	
 	private boolean found;
 	
-	private static boolean inited = false;
-	
 	private int publicationCount;
 	
-	private static List<PaperCitation> list = new LinkedList<PaperCitation>();
+	private List<PaperCitation> list = new LinkedList<PaperCitation>();
 
-	public Controller() throws FileNotFoundException {
-		if(!inited) {
-			HIndex.initLinkedList(list, "/publishingsList.txt");
-			inited = true;
-		}
+	public Controller(String path) throws FileNotFoundException {
+		HIndex.initLinkedList(list, path);	
 	}
 	
 	@FXML

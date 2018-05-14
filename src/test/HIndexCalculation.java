@@ -25,7 +25,7 @@ public class HIndexCalculation {
 		goal.add(new PaperCitation("Fabian Kortum", "The SE-Supreme - Unpublished Studies Part 6", 4));
 		goal.add(new PaperCitation("F. Kortum", "The SE-Supreme - Unpublished Studies Part 7", 2));
 		
-		List toTest = (new Controller()).getListPaperCitationFromName("Fabian Kortum");
+		List toTest = (new Controller("/publishingsList.txt")).getListPaperCitationFromName("Fabian Kortum");
 		
 		Assert.assertEquals(goal.size(), toTest.size());
 		
@@ -38,7 +38,7 @@ public class HIndexCalculation {
 	@Test
 	//Wrong input returns empty list
 	public void testInputMiss() throws FileNotFoundException {
-		Assert.assertEquals(new LinkedList(), (new Controller()).getListPaperCitationFromName("Falsche Eingabe"));
+		Assert.assertEquals(new LinkedList(), (new Controller("/publishingsList.txt")).getListPaperCitationFromName("Falsche Eingabe"));
 	}
 
 }

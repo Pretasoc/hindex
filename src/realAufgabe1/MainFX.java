@@ -18,7 +18,7 @@ public class MainFX extends Application {
 	public void start(Stage stage) throws Exception {
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("gui.fxml"));
-		Controller controller = new Controller();
+		Controller controller = new Controller("/publishingsList.txt");
         loader.setController(controller);
 
 		BorderPane root = loader.load();
