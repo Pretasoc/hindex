@@ -9,6 +9,7 @@ import org.junit.Test;
 import junit.framework.Assert;
 import realAufgabe1.Controller;
 
+// Test for own list of publications to fulfill task
 public class ListTest {
 
 	@Test

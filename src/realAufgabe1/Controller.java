@@ -60,6 +60,7 @@ public class Controller {
 			return;
 		}
 
+		// to define/use other metrics write a corresponding method and call it instead of computeHIndex()
 		int result = computeHIndex(getListPaperCitationFromName(name));
 
 		output.setText(
@@ -101,6 +102,7 @@ public class Controller {
 		return matchedNames;
 	}
 	
+	// To define/use another metric than hIndex simply write a method similar to this correspondingly.
 	/**
 	 * compute the h-index from the list of papers
 	 * @param citations list of citations
