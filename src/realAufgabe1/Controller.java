@@ -22,25 +22,43 @@ public class Controller {
 	
 	private boolean found;
 	
+	private static boolean inited = false;
+	
 	private int publicationCount;
 	
 	private static List<PaperCitation> list = new LinkedList<PaperCitation>();
 
 	public Controller() throws FileNotFoundException {
-		HIndex.initLinkedList(list);
+		if(!inited) {
+			HIndex.initLinkedList(list);
+			inited = true;
+		}
 	}
 	
 	@FXML
-	private void initialize() {
+	private void initialize() {}
+	
+	/**
+	 * Checks whether the input has forbidden characters in it.
+	 * @param name
+	 * @return true if forbidden characters present, else false
+	 */
+	public boolean validateInput(String name) {
+		return !name.replaceAll("[a-zA-Z. ]","").equals("");
 	}
 	
+	/**
+	 * Handles input.
+	 * A Button is not needed when listening on enter.
+	 * This keeps the design simpler and makes it less error prone.
+	 * This makes [R08] obsolete.
+	 */
 	@FXML
 	protected void onEnterPressed() {
 
 		String name = input.getText();
 
-		// Test for forbidden characters
-		if(!name.replaceAll("[a-zA-Z. ]","").equals("")) {
+		if(validateInput(name)) {
 			output.setText("Error: " + name + " contains forbidden characters!");
 			return;
 		}
@@ -56,9 +74,9 @@ public class Controller {
 	}
 	
 	/**
-	 * Get all papers and their citations of the given author.
+	 * Get all PaperCitation and their citations of the given author.
 	 * @param name name of the author
-	 * @return a list of papers
+	 * @return a list of PaperCitation
 	 */
 	public List<PaperCitation> getListPaperCitationFromName(String name) {
 		List<PaperCitation> matchedNames = new LinkedList<PaperCitation>();
@@ -82,10 +100,6 @@ public class Controller {
 		// If list is empty, the author was not found
 		found = !(matchedNames.size() == 0);
 		publicationCount = matchedNames.size();
-		
-		for(PaperCitation pc : matchedNames) {
-			System.out.println(pc.getAuthor() + " " + pc.getTitle() + " " + pc.getCitations());
-		}
 		
 		return matchedNames;
 	}
