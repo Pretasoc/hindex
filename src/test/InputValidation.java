@@ -1,7 +1,5 @@
 package test;
 
-import static org.junit.Assert.*;
-
 import java.io.FileNotFoundException;
 
 import org.junit.Test;
@@ -9,9 +7,9 @@ import org.junit.Test;
 import junit.framework.Assert;
 import realAufgabe1.Controller;
 
+@SuppressWarnings("deprecation")
 public class InputValidation {
 
-	@SuppressWarnings("deprecation")
 	@Test
 	public void test() throws FileNotFoundException {
 		Controller c = new Controller();
