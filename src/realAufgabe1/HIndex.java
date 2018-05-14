@@ -36,8 +36,8 @@ public class HIndex {
 	    }
 	}
 	
-	public static void initLinkedList(List<PaperCitation> list) throws FileNotFoundException {
-		InputStream stream = Main.class.getResourceAsStream("/publishingsList.txt");
+	public static void initLinkedList(List<PaperCitation> list, String path) throws FileNotFoundException {
+		InputStream stream = MainFX.class.getResourceAsStream(path);
 		BufferedReader br = new BufferedReader(new InputStreamReader(stream));
 		try {
 			String x;

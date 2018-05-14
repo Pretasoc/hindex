@@ -30,7 +30,7 @@ public class Controller {
 
 	public Controller() throws FileNotFoundException {
 		if(!inited) {
-			HIndex.initLinkedList(list);
+			HIndex.initLinkedList(list, "/publishingsList.txt");
 			inited = true;
 		}
 	}
