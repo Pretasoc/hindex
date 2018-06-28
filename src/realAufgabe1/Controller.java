@@ -40,8 +40,11 @@ public class Controller {
 	 */
 	public boolean isMalformed(String name) {
 		if (name.length() == 0) return true;
-		if (name.startsWith(" ")) return true; 
-		return !name.replaceAll("[a-zA-Z. ]","").equals("");
+		if (name.startsWith(" ")) return true;
+		return name.codePoints().any(c => {
+			char character = (char c);
+			return !(Character.isLetter(c) || c == ' ' || c == '.')
+		});
 	}
 	
 	/**
