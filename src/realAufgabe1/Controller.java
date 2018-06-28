@@ -43,7 +43,7 @@ public class Controller {
 		if (name.startsWith(" ")) return true;
 		return name.codePoints().any(c => {
 			char character = (char c);
-			return !(Character.isLetter(c) || c == ' ' || c == '.')
+			return !(Character.isLetter(character) || character == ' ' || character == '.')
 		});
 	}
 	
